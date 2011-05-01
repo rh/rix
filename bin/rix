@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.join(File.dirname(__FILE__), %w[.. lib])
+
+require 'optparse'
+require 'rix'
+
+opts = OptionParser.new do |opts|
+  opts.banner = "Usage: rix <command> [options]"
+
+  opts.separator ""
+  opts.separator "Options:"
+
+  opts.on("-v", "--version", "Show the program version") do
+    puts Rix::VERSION
+    exit 0
+  end
+
+  opts.on_tail("-h", "--help", "Show this message") do
+    puts opts.help
+    exit 0
+  end
+end
+
+begin
+  opts.parse!
+rescue OptionParser::InvalidOption => e
+  puts "#{e.to_s.capitalize}. Run `rix --help` for help."
+  exit 1
+end
+
+case ARGV.size
+  when 0
+    puts opts.help
+    exit 0
+  else
+    puts "Invalid option. Run `rix --help` for help."
+    exit 1
+end
