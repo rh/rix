@@ -12,22 +12,9 @@ module Rix
       end
 
       def [](name)
-        (all[name] || UnknownCommand).new(:name => name)
+        (all[name] || Commands::UnknownCommand).new(:name => name)
       end
     end
   end
 
-  class UnknownCommand
-    def initialize(options)
-      @message = "Unknown command: #{options[:name]}. Type 'rix help commands' for a list of available commands."
-    end
-
-    def help
-      @message
-    end
-
-    def execute
-      puts @message
-    end
-  end
 end
