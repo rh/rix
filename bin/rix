@@ -9,6 +9,9 @@ if ARGV.size == 0
   puts "Type 'rix --help' for usage."
   exit 0
 elsif not ARGV[0].start_with? '-'
+  name = ARGV.shift
+  command = Rix::Command[name]
+  command.execute
 else
   opts = OptionParser.new do |opts|
     opts.on("-v", "--version") { puts Rix::VERSION; exit 0 }
