@@ -1,3 +1,5 @@
+require 'rix/commands/unknown'
+
 module Rix
 
   class Command
@@ -8,11 +10,11 @@ module Rix
       end
 
       def all
-        @all ||= {}
+        @all ||= Hash.new(Commands::UnknownCommand)
       end
 
       def [](name)
-        (all[name] || Commands::UnknownCommand).new(:name => name)
+        all[name].new(:name => name)
       end
     end
   end
