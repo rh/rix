@@ -1,7 +1,6 @@
 require 'rix/commands/unknown'
 
 module Rix
-
   class Command
     class << self
       def inherited(subclass)
@@ -16,7 +15,10 @@ module Rix
       def [](name)
         all[name].new(:name => name)
       end
+
+      def description(value)
+        define_singleton_method(:description) { value }
+      end
     end
   end
-
 end
