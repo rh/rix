@@ -1,6 +1,5 @@
 module Rix
   module Commands
-
     class Help < Command
       def help
         HELP
@@ -30,6 +29,5 @@ Usage:
   rix help <command>
 HELP
     end
-
   end
 end
