@@ -1,3 +1,4 @@
+require 'rix/registry'
 require 'rix/command'
 require 'rix/commands/help'
 require 'rix/commands/unknown'

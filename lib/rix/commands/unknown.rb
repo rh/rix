@@ -1,16 +1,18 @@
 module Rix
   module Commands
     class UnknownCommand
-      def initialize(options)
-        @message = "Unknown command: #{options[:name]}. Type 'rix help commands' for a list of available commands."
+      attr_accessor :name
+
+      def message
+        "Unknown command: #{name}. Type 'rix help commands' for a list of available commands."
       end
 
       def help
-        @message
+        message
       end
 
       def execute
-        puts @message
+        puts message
       end
     end
   end

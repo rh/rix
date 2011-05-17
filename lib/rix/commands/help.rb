@@ -13,9 +13,9 @@ module Rix
           name = ARGV[0]
           if name.downcase == 'commands'
             puts "Available commands:"
-            Command.all.each_key { |command| puts "  #{command}" }
+            Registry.instance.commands.each_key { |command| puts "  #{command}" }
           else
-            puts Command[name].help
+            puts Registry.instance[name].help
           end
         else
           puts HELP
