@@ -6,11 +6,7 @@ module Rix
 
       def opts
         OptionParser.new do |opts|
-          opts.banner = "Usage: rix show [options]"
-          opts.separator ""
-          opts.separator "Options:"
-          opts.on("-f", "--files FILES", "The name(s) or pattern(s) of the file(s) to process, separated by ':'.") { |files| @files = files }
-          opts.on("-x", "--xpath EXPRESSION", "The XPath expression used for selection.") { |xpath| @xpath = xpath }
+          opts.banner = "Usage: rix show <xpath expression> [file(s) and/or pattern(s)]"
         end
       end
 
@@ -19,15 +15,23 @@ module Rix
       end
 
       def execute
+        @files = []
+
         opts.parse!
 
-        raise "Missing option: -f, --files" if @files.nil? or @files.empty?
-        raise "Missing option: -x, --xpath" if @xpath.nil? or @xpath.empty?
+        @xpath = ARGV.shift.dup if ARGV.size > 0
+        # @files will hold all remaining command-line arguments on Windows,
+        # and expanded filenames on Mac, Linux etc.
+        @files = ARGV.uniq      if ARGV.size > 1
+
+        raise "Missing XPath expression" if @xpath.nil? or @xpath.empty?
 
         formatter = REXML::Formatters::Pretty.new
         formatter.compact = true
 
-        @files.split(":").each do |pattern|
+        @files.each do |pattern|
+          # Using Dir is only needed for Windows, where arguments are not expanded,
+          # on Mac, Linux etc. this will have no effect.
           Dir[pattern].each do |path|
             File.open(path) do |file|
               document = REXML::Document.new(file)
