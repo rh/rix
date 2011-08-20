@@ -5,15 +5,20 @@ $:.unshift File.join(File.dirname(__FILE__), %w[.. lib])
 require 'rix'
 require 'optparse'
 
+Rix::Registry.instance.register 'show', Rix::Commands::Show
 Rix::Registry.instance.register 'help', Rix::Commands::Help
 
 if ARGV.size == 0
   puts "Type 'rix --help' for usage."
-  exit 0
 elsif not ARGV[0].start_with? '-'
   name = ARGV.shift
   command = Rix::Registry.instance[name]
-  command.execute
+  begin
+    command.execute
+  rescue => e
+    puts "#{e.to_s.capitalize}. Type 'rix help #{name}' for usage."
+    exit 1
+  end
 else
   opts = OptionParser.new do |opts|
     opts.on("-v", "--version") { puts Rix::VERSION; exit 0 }
@@ -26,3 +31,5 @@ else
     exit 1
   end
 end
+
+exit 0
