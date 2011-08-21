@@ -22,7 +22,7 @@ module Rix
         @xpath = ARGV.shift.dup if ARGV.size > 0
         # @files will hold all remaining command-line arguments on Windows,
         # and expanded filenames on Mac, Linux etc.
-        @files = ARGV.uniq      if ARGV.size > 1
+        @files = ARGV.uniq      if ARGV.size > 0
 
         raise "Missing XPath expression" if @xpath.nil? or @xpath.empty?
 
