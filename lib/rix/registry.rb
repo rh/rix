@@ -18,7 +18,7 @@ module Rix
 
     def [](name)
       command = @commands[name].new
-      command.name = name if command.respond_to? :name
+      command.name = name if command.is_a? Commands::UnknownCommand
       command
     end
   end

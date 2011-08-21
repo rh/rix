@@ -5,6 +5,7 @@ $:.unshift File.join(File.dirname(__FILE__), %w[.. lib])
 require 'rix'
 require 'optparse'
 
+Rix::Registry.instance.register 'add-element', Rix::Commands::AddElement
 Rix::Registry.instance.register 'count', Rix::Commands::Count
 Rix::Registry.instance.register 'show', Rix::Commands::Show
 Rix::Registry.instance.register 'help', Rix::Commands::Help
