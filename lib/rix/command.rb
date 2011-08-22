@@ -32,17 +32,14 @@ module Rix
         # Using Dir is only needed for Windows, where arguments are not expanded,
         # on Mac, Linux etc. this will have no effect.
         Dir[pattern].each do |path|
-          File.open(path, 'r+') do |file|
+          File.open(path, 'r') do |file|
             document = REXML::Document.new(file)
             nodes = REXML::XPath.match(document, @xpath)
             before(path, nodes)
             nodes.each do |node|
               on_node(node)
             end
-            after
-            #file.truncate 0
-            #file.pos = 0
-            #document.write file
+            after(path, document)
           end
         end
       end
@@ -59,7 +56,10 @@ module Rix
     def on_node(node)
     end
 
-    def after
+    def after(path, document)
+      #File.open(path, 'w') do |file|
+      #  document.write file
+      #end
     end
 
     def after_all
