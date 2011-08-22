@@ -1,6 +1,6 @@
 module Rix
   module Commands
-    class Help < Command
+    class Help
       def help
         HELP
       end
