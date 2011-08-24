@@ -41,7 +41,7 @@ The `rename` command renames all selected elements and attributes.
     $ rix rename //h2 index.html --name h1
 
 Two commands are useful when run before an editing command: `count` and `show`.
-The `count` command gives the number of selected nodes(elements, attributes etc.) for every file. For example:
+The `count` command gives the number of selected nodes (elements, attributes etc.) for every file. For example:
 
     $ rix count //p *.html
 
