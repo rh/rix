@@ -6,6 +6,7 @@ require 'rix'
 require 'optparse'
 
 Rix::Registry.instance.register 'add-element', Rix::Commands::AddElement
+Rix::Registry.instance.register 'add-attribute', Rix::Commands::AddAttribute
 Rix::Registry.instance.register 'remove', Rix::Commands::Remove
 Rix::Registry.instance.register 'rename', Rix::Commands::Rename
 Rix::Registry.instance.register 'count', Rix::Commands::Count
