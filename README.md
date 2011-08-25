@@ -2,7 +2,7 @@
 
 rix makes it very easy to edit multiple XML files at once. You can use XPath to select just the nodes you want to edit, and supply a list of files to work on. With rix you can:
 
-* add elements
+* add elements and attributes
 * remove elements and attributes
 * rename elements and attributes
 * count elements and attributes
@@ -22,6 +22,7 @@ This will currently output the following:
 
     Available commands:
       add-element
+      add-attribute
       remove
       rename
       count
@@ -31,6 +32,10 @@ This will currently output the following:
 To add a new `td` element to every `tr` element in all HTML files in the current directory, run:
 
     $ rix add-element --name td //tr *.html
+
+To add a `@foo` attribute with the value 'bar' to every element in every XML file in the current directory, run:
+
+    $ rix add-attribute --name foo --value bar "//*" *.xml
 
 To remove all `font` elements from all HTML files in the current directory and below, run:
 
