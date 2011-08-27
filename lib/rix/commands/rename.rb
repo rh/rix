@@ -16,8 +16,12 @@ module Rix
         raise "Missing option: -n, --name" if @name.nil? or @name.empty?
       end
 
-      def on_node(node)
-        node.name = @name if node.respond_to? :name
+      def on_element(element)
+        element.name = @name
+      end
+
+      def on_attribute(attribute)
+        attribute.name = @name
       end
 
       def after(path, document)

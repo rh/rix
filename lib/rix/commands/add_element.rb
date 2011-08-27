@@ -18,8 +18,8 @@ module Rix
         raise "Missing option: -n, --name" if @name.nil? or @name.empty?
       end
 
-      def on_node(node)
-        element = node.add_element @name
+      def on_element(parent)
+        element = parent.add_element @name
         element.text = @value
       end
 

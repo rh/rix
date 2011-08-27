@@ -37,7 +37,9 @@ module Rix
             nodes = REXML::XPath.match(document, @xpath)
             before(path, nodes)
             nodes.each do |node|
-              on_node(node)
+              on_element(node)   if node.is_a? REXML::Element
+              on_attribute(node) if node.is_a? REXML::Attribute
+              on_text(node)      if node.is_a? REXML::Text
             end
             after(path, document)
           end
@@ -53,7 +55,13 @@ module Rix
     def before(path, nodes)
     end
 
-    def on_node(node)
+    def on_element(element)
+    end
+
+    def on_attribute(attribute)
+    end
+
+    def on_text(text)
     end
 
     def after(path, document)

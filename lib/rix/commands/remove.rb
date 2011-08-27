@@ -6,10 +6,13 @@ module Rix
         "Usage: rix remove <xpath> <files>"
       end
 
-      def on_node(node)
-        node.parent.delete_element node if node.is_a? REXML::Element
-        # BUG: 'node.element.delete_attribute node' doesn't work
-        node.element.delete_attribute node.name if node.is_a? REXML::Attribute
+      def on_element(element)
+        element.parent.delete_element element
+      end
+
+      def on_attribute(attribute)
+        # BUG: 'attribute.element.delete_attribute attribute' doesn't work
+        attribute.element.delete_attribute attribute.name
       end
 
       def after(path, document)

@@ -10,6 +10,21 @@ module Rix
         "Usage: rix show <xpath> <files>"
       end
 
+      def on_element(element)
+        @formatter.write(element, $stdout)
+        puts
+      end
+
+      def on_attribute(attribute)
+        @formatter.write(attribute, $stdout)
+        puts
+      end
+
+      def on_text(text)
+        @formatter.write(text, $stdout)
+        puts
+      end
+
       def on_node(node)
         @formatter.write(node, $stdout)
         puts

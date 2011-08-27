@@ -6,15 +6,24 @@ module Rix
         "Usage: rix trim <xpath> <files>"
       end
 
-      def on_node(node)
-        node.text = node.text.strip if node.is_a? REXML::Element
-        node.element.attributes[node.name] = node.to_s.strip if node.is_a? REXML::Attribute
-        if node.is_a? REXML::Text
-          stripped = node.to_s.strip
-          # Leave 'empty' nodes intact
-          if stripped.size > 0
-            node.replace_with(REXML::Text.new(stripped))
-          end
+      def on_element(element)
+        element.text = element.text.strip
+      end
+
+      def on_attribute(attribute)
+        attribute.element.attributes[attribute.name] = attribute.to_s.strip
+        attribute.element.attributes[attribute.name]
+      end
+
+      def on_text(text)
+        stripped = text.to_s.strip
+        # Leave 'empty' nodes intact
+        if stripped.size > 0
+          child = REXML::Text.new(stripped)
+          text.replace_with(child)
+          child.to_s
+        else
+          text.to_s
         end
       end
 

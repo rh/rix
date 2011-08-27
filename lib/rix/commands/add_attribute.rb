@@ -18,8 +18,8 @@ module Rix
         raise "Missing option: -n, --name" if @name.nil? or @name.empty?
       end
 
-      def on_node(node)
-        node.add_attribute(@name, @value) if node.is_a? REXML::Element
+      def on_element(element)
+        element.add_attribute(@name, @value)
       end
 
       def after(path, document)
