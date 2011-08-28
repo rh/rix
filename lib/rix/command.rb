@@ -33,8 +33,7 @@ module Rix
         # on Mac, Linux etc. this will have no effect.
         Dir[pattern].each do |path|
           File.open(path, 'r') do |file|
-            document = REXML::Document.new(file)
-            document.context[:attribute_quote] = :quote
+            document = REXML::Document.new(file, :ignore_whitespace_nodes => :all, :attribute_quote => :quote)
             nodes = REXML::XPath.match(document, @xpath)
             before(path, nodes)
             nodes.each do |node|
