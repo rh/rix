@@ -5,6 +5,7 @@ rix makes it very easy to edit multiple XML files at once. You can use XPath to 
 * add elements and attributes
 * remove elements and attributes
 * rename elements and attributes
+* trim elements and attributes
 * count elements and attributes
 * pretty print elements and attributes
 
@@ -25,6 +26,7 @@ This will currently output the following:
       add-attribute
       remove
       rename
+      trim
       count
       show
       help
@@ -44,6 +46,10 @@ To remove all `font` elements from all HTML files in the current directory and b
 The `rename` command renames all selected elements and attributes.
 
     $ rix rename //h2 index.html --name h1
+
+The values of elements and attributes can be trimmed, so ' foo ' becomes 'foo'. Trimming all text nodes is as easy as:
+
+    $ rix trim "//text()" *.xml
 
 Two commands are useful when run before an editing command: `count` and `show`.
 The `count` command gives the number of selected nodes (elements, attributes etc.) for every file. For example:
