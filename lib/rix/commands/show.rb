@@ -11,8 +11,8 @@ module Rix
       end
 
       def on_node(node)
-        @formatter.write(node, $stdout)
-        puts
+        @formatter.write(node, out)
+        out.puts
       end
     end
   end

@@ -6,7 +6,7 @@ module Rix
       end
 
       def before(name, document, nodes)
-        puts "#{name}: #{nodes.size}"
+        out.puts "#{name}: #{nodes.size}"
       end
     end
   end

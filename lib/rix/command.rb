@@ -2,6 +2,7 @@ require 'rix/commands/unknown'
 
 module Rix
   class Command
+    attr_accessor :out
     attr_accessor :files
     attr_accessor :xpath
 

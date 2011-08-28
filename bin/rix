@@ -19,6 +19,7 @@ if ARGV.size == 0
 elsif not ARGV[0].start_with? '-'
   name = ARGV.shift
   command = Rix::Registry.instance[name]
+  command.out = $stdout
   begin
     command.execute
   rescue => e

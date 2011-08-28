@@ -1,7 +1,7 @@
 module Rix
   module Commands
     class UnknownCommand
-      attr_accessor :name
+      attr_accessor :out, :name
 
       def message
         "Unknown command: #{name}. Type 'rix help commands' for a list of available commands."
@@ -12,7 +12,7 @@ module Rix
       end
 
       def execute
-        puts message
+        out.puts message
       end
     end
   end
