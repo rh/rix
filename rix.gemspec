@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name = 'rix'
   s.version = Rix::VERSION
   s.author = 'Richard Hubers'
-  s.date = '2011-08-24'
+  s.date = Time.now.strftime('%Y-%m-%d')
   s.description = 'Command-line XML editing and refactoring'
   s.summary = 'Command-line XML editor'
   s.email = 'richard.hubers@gmail.com'
