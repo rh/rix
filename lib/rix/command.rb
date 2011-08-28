@@ -34,6 +34,7 @@ module Rix
         Dir[pattern].each do |path|
           File.open(path, 'r') do |file|
             document = REXML::Document.new(file)
+            document.context[:attribute_quote] = :quote
             nodes = REXML::XPath.match(document, @xpath)
             before(path, nodes)
             nodes.each do |node|
