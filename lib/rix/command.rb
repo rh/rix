@@ -33,15 +33,7 @@ module Rix
         # on Mac, Linux etc. this will have no effect.
         Dir[pattern].each do |path|
           File.open(path, 'r') do |file|
-            document = REXML::Document.new(file, :ignore_whitespace_nodes => :all, :attribute_quote => :quote)
-            nodes = REXML::XPath.match(document, @xpath)
-            before(path, nodes)
-            nodes.each do |node|
-              on_element(node)   if node.is_a? REXML::Element
-              on_attribute(node) if node.is_a? REXML::Attribute
-              on_text(node)      if node.is_a? REXML::Text
-            end
-            after(path, document)
+            on_source(file, path)
           end
         end
       end
@@ -49,28 +41,37 @@ module Rix
       after_all
     end
 
-    def before_all
+    def on_source(source, name)
+      document = Document.new(source, :ignore_whitespace_nodes => :all, :attribute_quote => :quote)
+      on_document(document, name)
     end
 
-    def before(path, nodes)
+    def on_document(document, name)
+      nodes = XPath.match(document, @xpath)
+      before(name, document, nodes)
+      nodes.each do |node|
+        on_node(node)
+        on_element(node)   if node.is_a? Element
+        on_attribute(node) if node.is_a? Attribute
+        on_text(node)      if node.is_a? Text
+      end
+      after(name, document)
     end
 
-    def on_element(element)
-    end
+    def before_all; end
 
-    def on_attribute(attribute)
-    end
+    def before(name, document, nodes); end
 
-    def on_text(text)
-    end
+    def on_node(node); end
 
-    def after(path, document)
-      #File.open(path, 'w') do |file|
-      #  document.write file
-      #end
-    end
+    def on_element(element); end
 
-    def after_all
-    end
+    def on_attribute(attribute); end
+
+    def on_text(text); end
+
+    def after(name, document); end
+
+    def after_all; end
   end
 end

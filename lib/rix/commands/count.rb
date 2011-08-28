@@ -5,8 +5,8 @@ module Rix
         "Usage: rix count <xpath> <files>"
       end
 
-      def before(path, nodes)
-        puts "#{path}: #{nodes.size}"
+      def before(name, document, nodes)
+        puts "#{name}: #{nodes.size}"
       end
     end
   end

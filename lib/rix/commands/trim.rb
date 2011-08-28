@@ -7,7 +7,7 @@ module Rix
       end
 
       def on_element(element)
-        element.text = element.text.strip
+        element.text = element.text.strip if element.has_text?
       end
 
       def on_attribute(attribute)
@@ -19,7 +19,7 @@ module Rix
         stripped = text.to_s.strip
         # Leave 'empty' nodes intact
         if stripped.size > 0
-          child = REXML::Text.new(stripped)
+          child = Text.new(stripped)
           text.replace_with(child)
           child.to_s
         else
