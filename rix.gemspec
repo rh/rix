@@ -14,5 +14,6 @@ Gem::Specification.new do |s|
   s.files = Dir['README', 'bin/rix', 'lib/**/*']
   s.executables = ['rix']
   s.homepage = 'http://github.com/rh/rix'
+  s.license = 'MIT'
   s.has_rdoc = false
 end
