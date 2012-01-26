@@ -2,6 +2,7 @@
 
 rix makes it very easy to edit multiple XML files at once. You can use XPath to select just the nodes you want to edit, and supply a list of files to work on. With rix you can:
 
+* set the value of elements and attributes
 * add elements and attributes
 * remove elements and attributes
 * rename elements and attributes
@@ -24,12 +25,21 @@ This will currently output the following:
     Available commands:
       add-element
       add-attribute
+      set
       remove
       rename
       trim
       count
       show
       help
+
+To set the value of all `date` elements:
+
+    $ rix set --value 26-01-2012 //date *.xml
+
+When using `set`, values can be cleared by omitting the `value` option:
+
+    $ rix set //@secret *.xml
 
 To add a new `td` element to every `tr` element in all HTML files in the current directory, run:
 

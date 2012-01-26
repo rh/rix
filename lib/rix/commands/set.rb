@@ -13,16 +13,15 @@ module Rix
       end
 
       def on_element(element)
-        element.text = @value
+        element.text = @value || ""
       end
 
       def on_attribute(attribute)
-        attribute.element.attributes[attribute.name] = @value
-        attribute.element.attributes[attribute.name]
+        attribute.element.attributes[attribute.name] = @value || ""
       end
 
       def on_text(text)
-        node = Text.new(@value)
+        node = Text.new(@value || "")
         text.replace_with(node)
         node.to_s
       end
