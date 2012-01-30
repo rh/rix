@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Rix
   describe Registry do
-    before(:all) do
+    before(:each) do
       @registry = Registry.instance
     end
 
