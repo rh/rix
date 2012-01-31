@@ -3,7 +3,7 @@ require 'spec_helper'
 module Rix
   module Commands
     describe Count do
-      before(:each) do
+      before do
         @out = StringIO.new
         command = Count.new
         command.out = @out

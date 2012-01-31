@@ -3,7 +3,7 @@ require 'spec_helper'
 module Rix
   module Commands
     describe Trim do
-      before(:each) do
+      before do
         @command = Trim.new
         @element = Element.new "element"
       end

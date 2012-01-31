@@ -3,7 +3,7 @@ require 'spec_helper'
 module Rix
   module Commands
     describe Set do
-      before(:each) do
+      before do
         @command = Set.new
         @element = Element.new "element"
         @element.text = "before"
@@ -12,7 +12,7 @@ module Rix
       end
 
       context "with #value set" do
-        before(:each) do
+        before do
           @command.value = "after"
         end
 

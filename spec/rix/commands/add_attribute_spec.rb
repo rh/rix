@@ -3,7 +3,7 @@ require 'spec_helper'
 module Rix
   module Commands
     describe AddAttribute do
-      before(:each) do
+      before do
         @command = AddAttribute.new
         @command.name = "foo"
         @command.value = "bar"
