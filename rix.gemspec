@@ -1,5 +1,3 @@
-$:.unshift 'lib'
-
 require 'rix'
 
 Gem::Specification.new do |s|
