@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>rix by rh</title>
+    
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>rix</h1>
+        <p>Command-line XML editing and refactoring</p>
+        <p class="view"><a href="https://github.com/rh/rix">View the Project on GitHub <small>rh/rix</small></a></p>
+        <ul>
+          <li><a href="https://github.com/rh/rix/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/rh/rix/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/rh/rix">Fork On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>rix: command-line XML editing and refactoring</h1>
+
+<p>rix makes it very easy to edit multiple XML files at once. You can use XPath to select just the nodes you want to edit, and supply a list of files to work on. With rix you can:</p>
+
+<ul>
+<li>set the value of elements and attributes</li>
+<li>add elements and attributes</li>
+<li>remove elements and attributes</li>
+<li>rename elements and attributes</li>
+<li>trim elements and attributes</li>
+<li>count elements and attributes</li>
+<li>pretty print elements and attributes</li>
+</ul><h2>Installation</h2>
+
+<pre><code>gem install rix
+</code></pre>
+
+<h2>Basic usage</h2>
+
+<p>To see a list of available commands, run:</p>
+
+<pre><code>$ rix help commands
+</code></pre>
+
+<p>This will currently output the following:</p>
+
+<pre><code>Available commands:
+  add-element
+  add-attribute
+  set
+  remove
+  rename
+  trim
+  count
+  show
+  help
+</code></pre>
+
+<p>To set the value of all <code>date</code> elements:</p>
+
+<pre><code>$ rix set --value 26-01-2012 //date *.xml
+</code></pre>
+
+<p>When using <code>set</code>, values can be cleared by omitting the <code>value</code> option:</p>
+
+<pre><code>$ rix set //@secret *.xml
+</code></pre>
+
+<p>To add a new <code>td</code> element to every <code>tr</code> element in all HTML files in the current directory, run:</p>
+
+<pre><code>$ rix add-element --name td //tr *.html
+</code></pre>
+
+<p>To add a <code>@foo</code> attribute with the value 'bar' to every element in every XML file in the current directory, run:</p>
+
+<pre><code>$ rix add-attribute --name foo --value bar "//*" *.xml
+</code></pre>
+
+<p>To remove all <code>font</code> elements from all HTML files in the current directory and below, run:</p>
+
+<pre><code>$ rix remove //font **/*.html
+</code></pre>
+
+<p>The <code>rename</code> command renames all selected elements and attributes.</p>
+
+<pre><code>$ rix rename //h2 index.html --name h1
+</code></pre>
+
+<p>The values of elements and attributes can be trimmed, so ' foo ' becomes 'foo'. Trimming all text nodes is as easy as:</p>
+
+<pre><code>$ rix trim "//text()" *.xml
+</code></pre>
+
+<p>Two commands are useful when run before an editing command: <code>count</code> and <code>show</code>.
+The <code>count</code> command gives the number of selected nodes (elements, attributes etc.) for every file. For example:</p>
+
+<pre><code>$ rix count //p *.html
+</code></pre>
+
+<p>might give an output such as this:</p>
+
+<pre><code>public/404.html: 2
+public/422.html: 1
+public/500.html: 3
+</code></pre>
+
+<p><code>show</code> gives a pretty-printed output of all selected nodes:</p>
+
+<pre><code>$ rix show //ul index.html
+</code></pre>
+
+<p>will result in something like this:</p>
+
+<pre><code>&lt;ul id="menu"&gt;
+  &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="/news"&gt;News&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="/jobs"&gt;Jobs&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="/about"&gt;About&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/rh">rh</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+  </body>
+</html>
